@@ -6,13 +6,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests\TeacherRequest;
 use App\Teacher;
 use App\Email;
-use App\Municipality;
 use App\State;
 use App\Country;
 use App\Headquarter;
 use App\Classification;
 use App\Phone;
-use App\Parish;
 
 
 
@@ -35,16 +33,12 @@ class teachers extends Controller
         $clasificaciones = Classification::all();
         $municipios = Municipality::all();
         $estados = State::all();
-        $municipios = Municipality::all();
-        $parroquias = Parish::all();
 
         return view('teacher/create')
         ->with('sedes',$sedes)
         ->with('clasificaciones',$clasificaciones)
         ->with('paises',$paises)
-        ->with('estados',$estados)
-        ->with('municipios',$municipios)
-        ->with('parroquias',$parroquias);
+        ->with('estados',$estados);
     }
 
     public function store(TeacherRequest $request)
@@ -61,8 +55,6 @@ class teachers extends Controller
             'status'        =>  $request->status,
             'observation'   =>  $request->observation,
             'state_id'      =>  $request->state_id,
-            'municipality_id'      =>  $request->municipality_id,
-            'parish_id'     =>  $request->parish_id,
         ]);
 
         if (!empty($request->phone1)) {

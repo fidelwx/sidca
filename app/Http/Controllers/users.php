@@ -25,7 +25,6 @@ class users extends Controller
     public function store(Request $request)
     {
         $usuario = User::create([
-            'name'          => 'name',
             'user'          =>  $request->user,
             'first_name'    =>  $request->first_name,
             'last_name'     =>  $request->last_name,
@@ -39,12 +38,14 @@ class users extends Controller
 
     public function show($id)
     {
-        return view('user.show');
+        $usuario = User::find($id);
+        return view('user.show')->with('usuario',$usuario);
     }
 
     public function edit($id)
     {
-        return view('user.edit');
+        $usuario = User::find($id);
+        return view('user.edit')->with('usuario',$usuario);
     }
 
     public function update(Request $request, $id)

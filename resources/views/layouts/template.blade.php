@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>SIDCA | Registro</title>
+	<title>SIDCA</title>
 	<link rel="icon" href="{{asset('img/Unerg-1.png')}}">
 	<!-- CSS FILES -->
 	<link rel="stylesheet" href="{{asset('css/uikit.min.css')}}" />
@@ -27,8 +27,8 @@
 						@else
 						<div class="uk-navbar-right">
 							<ul class="uk-navbar-nav">
-								<li class="uk-active uk-visible@m"><a href="" data-uk-icon="home"></a></li>
-								<li class="uk-visible@s"><a href="#">PROFESOR</a></li>
+								<li class="uk-active uk-visible@m"><a href="/sidca" data-uk-icon="home"></a></li>
+								<li class="uk-visible@s"><a href="{{route('profesores.index')}}">PROFESOR</a></li>
 								<li class="uk-visible@s"><a href="#">NOMINA</a></li>
 								<li class="uk-visible@s"><a href="#">PRECARGAR DATOS</a></li>
 								<li><a class="uk-navbar-toggle" data-uk-toggle data-uk-navbar-toggle-icon uk-toggle="target: #offcanvas-slide"></a></li>
@@ -58,7 +58,7 @@
 
 			<!-- FOOT -->
 			<div class="uk-position-bottom-center uk-position-small">
-				<span class="uk-text-small uk-text-center">© 2018 | Direccion De Informatica | <a href="https://www.unerg.edu.ve">Unerg</a></span>
+				<span class="uk-text-small uk-text-center">© 2018 | Direccion De Informatica | <a href="#">Unerg</a></span>
 			</div>
 			<!-- /FOOT -->
 
@@ -71,14 +71,10 @@
 				<ul class="uk-nav-default uk-nav-parent-icon" uk-nav>
 					<li class="uk-active"><a href="#">Menu Principal</a></li>
 					<li class="uk-parent">
-						<a href="#" >PROFESOR</a>
+						<a href="{{route('profesores.index')}}" >PROFESOR</a>
 						<ul class="uk-nav-sub">
-							<li><a href="#">SubMenu 1</a></li>
+							<li><a href="{{route('profesores.index')}}">Lista de Profesores</a></li>
 							<li><a href="#">SubMenu 2</a></li>
-							<ul class="uk-nav-sub">
-								<li><a href="#">SubMenu 3</a></li>
-								<li><a href="#">SubMenu 4</a></li>
-							</ul>
 						</ul>
 					</li>
 					<li class="uk-parent">
@@ -86,10 +82,6 @@
 						<ul class="uk-nav-sub">
 							<li><a href="#">SubMenu 1</a></li>
 							<li><a href="#">SubMenu 2</a></li>
-							<ul class="uk-nav-sub">
-								<li><a href="">SubMenu 3</a></li>
-								<li><a href="">SubMenu 4</a></li>
-							</ul>
 						</ul>
 					</li>
 					<li class="uk-parent">
