@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateParishesTable extends Migration
+class CreateServiceCommissionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateParishesTable extends Migration
      */
     public function up()
     {
-        Schema::create('parishes', function (Blueprint $table) {
+        Schema::create('service_commissions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('parish');
-            $table->unsignedInteger('municipalities_id');
-
-            $table->foreign('municipalities_id')->references('id')->on('municipalities')->onDelecte('cascade');
+            $table->timestamps();
         });
     }
 
@@ -29,6 +26,6 @@ class CreateParishesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('parishes');
+        Schema::dropIfExists('service_commissions');
     }
 }
