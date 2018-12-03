@@ -15,6 +15,12 @@ class CreateTransfersTable extends Migration
     {
         Schema::create('transfers', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('area_origin');
+            $table->string('area_destination');
+            
+            $table->integer('teacher_id')->unsigned();
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

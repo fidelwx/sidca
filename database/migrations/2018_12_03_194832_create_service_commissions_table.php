@@ -15,6 +15,15 @@ class CreateServiceCommissionsTable extends Migration
     {
         Schema::create('service_commissions', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('type');
+            $table->string('name_comitent');
+            $table->string('lapse');
+            $table->date('date_start');
+            $table->date('date_end');
+            $table->string('recognition');
+            $table->integer('teacher_id')->unsigned();
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

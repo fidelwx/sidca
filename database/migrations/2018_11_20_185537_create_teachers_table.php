@@ -21,6 +21,8 @@ class CreateTeachersTable extends Migration
             $table->date('birthdate');
             $table->string('address');
             $table->unsignedInteger('countrie_id');
+            $table->unsignedInteger('crh_id');
+
             $table->unsignedInteger('state_id');
             $table->unsignedInteger('classification_id');
             $table->unsignedInteger('headquarters_id');
@@ -31,6 +33,7 @@ class CreateTeachersTable extends Migration
             $table->foreign('countrie_id')->references('id')->on('countries')->onDelete('cascade');
             $table->foreign('state_id')->references('id')->on('states')->onDelete('cascade');
             $table->foreign('headquarters_id')->references('id')->on('headquarters')->onDelete('cascade');
+            $table->foreign('crh_id')->references('id')->on('crhs')->onDelete('cascade');
 
         });
     }

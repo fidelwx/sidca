@@ -15,6 +15,15 @@ class CreateSabbaticalsTable extends Migration
     {
         Schema::create('sabbaticals', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('antiquity');
+            $table->date('date_start');
+            $table->date('date_end');
+            $table->string('reason');
+            $table->string('recognition');
+
+            $table->integer('teacher_id')->unsigned();
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

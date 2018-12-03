@@ -17,7 +17,6 @@ class CreateNucleiTable extends Migration
             $table->increments('id');
             $table->string('nucleus');
             $table->unsignedInteger('headquarter_id');
-
             $table->foreign('headquarter_id')->references('id')->on('headquarters')->onDelete('cascade');
         });
     }

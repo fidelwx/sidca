@@ -15,6 +15,9 @@ class CreateCrhsTable extends Migration
     {
         Schema::create('crhs', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->integer('program_id')->unsigned();
+            $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
             $table->timestamps();
         });
     }
