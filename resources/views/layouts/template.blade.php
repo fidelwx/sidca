@@ -74,7 +74,8 @@
 						<a href="{{route('profesores.index')}}" >PROFESOR</a>
 						<ul class="uk-nav-sub">
 							<li><a href="{{route('profesores.index')}}">Lista de Profesores</a></li>
-							<li><a href="#">SubMenu 2</a></li>
+							<li><a href="{{route('profesores.create')}}">Nuevo Profesor</a></li>
+
 						</ul>
 					</li>
 					<li class="uk-parent">

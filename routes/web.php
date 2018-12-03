@@ -15,3 +15,7 @@ Route::get('/sidca', 'HomeController@index')->name('home');
 Route::resource('profesores','teachers');
 Route::resource('usuarios','users');
 
+// meiyer
+Route::get('/profesores/edit/{teacher}', 'teachers@edit');
+
+
