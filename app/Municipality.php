@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Municipality extends Model
 {
+    public $timestamps = false;
+    
     protected $fillable = [
     	'municipality',
         'state_id',
@@ -20,4 +22,9 @@ class Municipality extends Model
     {
     	return $this->hasMany(Parish::class);
     }
+
+    public function teachers()
+    {
+        return $this->hasMany(Teacher::class);
+    }    
 }

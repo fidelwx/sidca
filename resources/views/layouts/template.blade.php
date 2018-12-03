@@ -42,6 +42,20 @@
 
 			@yield('content')
 
+			
+			@if(session('info'))
+				<section class="content-header">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="alert alert-success alert-dismissible">
+									<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+									{{ session('info') }}
+								</div>
+							</div>
+						</div>
+				</section>
+			@endif
+
 			<!-- FOOT -->
 			<div class="uk-position-bottom-center uk-position-small">
 				<span class="uk-text-small uk-text-center">© 2018 | Direccion De Informatica | <a href="https://www.unerg.edu.ve">Unerg</a></span>

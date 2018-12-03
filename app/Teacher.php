@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Teacher extends Model
 {
+    public $timestamps = false;
+
     protected $fillable = [
     	'first_name',
         'last_name',
@@ -13,23 +15,21 @@ class Teacher extends Model
         'address',
         'birthdate',
         'type_id', 
-    	'area_id', 
-    	'state_id', 
-    	'countrie_id', 
-    	'classification_id',  
-    	'headquarters_id', 
-    	'status', 
-    	'observation',
+        'area_id', 
+        'state_id', 
+        'countrie_id', 
+        'classification_id',  
+        'headquarters_id', 
+        'status', 
+        'observation',
+        'parish_id',
+        'municipality_id',
+
     ];
 
     public function type()
     {
         return $this->belongsTo(Type::class);
-    }
-
-    public function state()
-    {
-        return $this->belongsTo(State::class);
     }
 
     public function country()
@@ -47,6 +47,21 @@ class Teacher extends Model
         return $this->belongsTo(Headquarter::class);
     }
 
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
+
+    public function municipality()
+    {
+        return $this->belongsTo(Municipality::class);
+    }
+
+    public function parish()
+    {
+        return $this->belongsTo(Parish::class);
+    }
+
     public function emails()
     {
         return $this->hasMany(Email::class);
@@ -59,6 +74,6 @@ class Teacher extends Model
 
     public function studies()
     {
-        return $this->hasMany(Study::class)
+        return $this->hasMany(Study::class);
     }
 }

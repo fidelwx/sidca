@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Nucleus extends Model
 {
+    public $timestamps = false;
+	
     protected $fillable = [
     	'nucleus', 
     	'headquarter_id',
