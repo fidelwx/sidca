@@ -16,6 +16,9 @@ class CreateProgramsTable extends Migration
         Schema::create('programs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('program');
+            $table->string('director');
+            $table->string('resolution');
+
             $table->unsignedInteger('area_id');
 
             $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');

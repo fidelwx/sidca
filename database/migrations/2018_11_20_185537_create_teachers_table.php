@@ -22,6 +22,7 @@ class CreateTeachersTable extends Migration
             $table->string('address');
             $table->unsignedInteger('countrie_id');
             $table->unsignedInteger('crh_id');
+            $table->integer('roster_id')->unsigned();
 
             $table->unsignedInteger('state_id');
             $table->unsignedInteger('classification_id');
@@ -35,6 +36,7 @@ class CreateTeachersTable extends Migration
             $table->foreign('headquarter_id')->references('id')->on('headquarters')->onDelete('cascade');
             $table->foreign('crh_id')->references('id')->on('crhs')->onDelete('cascade');
 
+            $table->foreign('roster_id')->references('id')->on('rosters')->onDelete('cascade');
         });
     }
 
