@@ -22,12 +22,17 @@ class CreateMovementsTable extends Migration
             $table->integer('service_commission_id')->unsigned();
             $table->integer('permission_id')->unsigned();
             $table->integer('sabbatical_id')->unsigned();
+            $table->integer('transfer_id')->unsigned();
+
 
              $table->foreign('annexes_id')->references('id')->on('annexes')->onDelete('cascade');
              $table->foreign('service_commission_id')->references('id')->on('service_commissions')->onDelete('cascade');
              $table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade');
              $table->foreign('sabbatical_id')->references('id')->on('sabbaticals')->onDelete('cascade');
              $table->foreign('substitution_id')->references('id')->on('substitutions')->onDelete('cascade');
+             $table->foreign('competition_id')->references('id')->on('competitions')->onDelete('cascade');
+             $table->foreign('transfer_id')->references('id')->on('transfers')->onDelete('cascade');
+
 
             $table->timestamps();
         });

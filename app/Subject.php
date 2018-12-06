@@ -20,4 +20,9 @@ class Subject extends Model
     {
     	return $this->belongsTo(Program::class);
     }
+
+     public function area()
+    {
+        return $this->belongsTo(Area::class);
+    }
 }

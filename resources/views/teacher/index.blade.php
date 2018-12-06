@@ -45,6 +45,7 @@
 				</td>
 
 			</tr>
+			@include('layouts.modify')
 			@empty
 
 			<h3>No existen datos.</h3>
@@ -54,7 +55,6 @@
 
 	</table>
 </div>
-@include('layouts.modify')
 
 <!-- /REPORT -->
 @endsection

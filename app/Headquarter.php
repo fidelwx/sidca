@@ -21,4 +21,13 @@ class Headquarter extends Model
     {
     	return $this->hasMany(Nucleus::class);
     }
+
+    public function competition()
+    {
+        return $this->hasMany(competition::class);
+    }
+
+    public function rosters(){
+        return $this->hasMany(Roster::class);
+    }
 }

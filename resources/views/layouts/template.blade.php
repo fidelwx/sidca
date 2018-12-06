@@ -59,8 +59,8 @@
 					<li class="uk-parent">
 						<a href="#" >PROFESOR</a>
 						<ul class="uk-nav-sub">
-							<li><a href="create">Registrar Profesor</a></li>
-							<li><a href="/profesores">Listado de Profesores</a></li>
+							<li><a href="{{route('profesores.create')}}">Registrar Profesor</a></li>
+							<li><a href="{{route('profesores.index')}}">Listado de Profesores</a></li>
 						</ul>
 					</li>
 					<li class="uk-parent">

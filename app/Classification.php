@@ -18,6 +18,7 @@ class Classification extends Model
     }
     public function anexes()
     {
+        // asensos
     	return $this->hasMany(Annexes::class);
     }
 }

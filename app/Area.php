@@ -11,6 +11,9 @@ class Area extends Model
     protected $fillable= [
     	'area',
         'nuclei_id',
+        'dean',
+        'code',
+        'resolution'
     ];
 
     public function nuclei()
@@ -21,5 +24,20 @@ class Area extends Model
     public function programs()
     {
     	return $this->hasMany(Program::class);
+    }
+
+    public function competitions()
+    {
+        return $this->hasMany(Competition::class);
+    }
+
+    public function subject()
+    {
+        // unidad curricular
+        return $this->hasMany(Subject::class);
+    }
+
+    public function rosters(){
+        return $this->hasMany(Roster::class);
     }
 }

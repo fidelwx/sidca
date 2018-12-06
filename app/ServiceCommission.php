@@ -20,4 +20,8 @@ class ServiceCommission extends Model
     public function teacher(){
     	return $this->belognsTo(Teacher::class);
     }
+
+    public function movement(){
+        return $this->belognsTo(Movement::class);
+    }
 }
