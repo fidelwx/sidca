@@ -21,6 +21,9 @@ class CreateTeachersTable extends Migration
             $table->date('birthdate');
             $table->string('address');
             $table->unsignedInteger('countrie_id');
+            $table->unsignedInteger('crh_id');
+            $table->unsignedinteger('roster_id');
+            $table->unsignedInteger('state_id');
             $table->unsignedInteger('classification_id');
             $table->unsignedInteger('headquarter_id');
             $table->enum('status', ['activo', 'inactivo']);
@@ -29,6 +32,7 @@ class CreateTeachersTable extends Migration
             $table->foreign('classification_id')->references('id')->on('classifications')->onDelete('cascade');
             $table->foreign('countrie_id')->references('id')->on('countries')->onDelete('cascade');
             $table->foreign('headquarter_id')->references('id')->on('headquarters')->onDelete('cascade');
+            $table->foreign('roster_id')->references('id')->on('rosters')->onDelete('cascade');
 
         });
     }
