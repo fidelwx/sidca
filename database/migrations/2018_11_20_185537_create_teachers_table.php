@@ -22,7 +22,9 @@ class CreateTeachersTable extends Migration
             $table->string('address');
             $table->unsignedInteger('countrie_id');
             $table->unsignedInteger('crh_id');
-            $table->unsignedinteger('roster_id');
+
+            $table->integer('roster_id')->unsigned();
+
             $table->unsignedInteger('state_id');
             $table->unsignedInteger('classification_id');
             $table->unsignedInteger('headquarter_id');
