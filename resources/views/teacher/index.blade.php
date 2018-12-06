@@ -6,7 +6,7 @@
 	<!-- TABLA DE DATOS -->
 
 	<div class="uk-width-1-1" >
-		<h4 class="uk-align-left">Reporte Sidca:</h4>
+		<h3 class="uk-align-left">Reporte Sidca:</h3>
 		<div class="uk-align-right uk-flex uk-flex-stretch">
 			<form class="uk-search uk-search-default">
 				<span uk-search-icon></span>
@@ -39,17 +39,22 @@
 				<td>{{ $teacher->headquarter->headquarter }}</td>
 				<td>{{ $teacher->status }}</td>
 
-				<td><a href="#" uk-toggle uk-icon="file-edit"></a>  <a href="" uk-icon="info"></a></td>
+				<td>
+					<a href="{{-- /profesores/edit/{{$teacher->id}} --}} #modal-sections" uk-toggle uk-icon="file-edit"></a> 
+					<a href="" uk-icon="info"></a>
+				</td>
+
 			</tr>
 			@empty
 
-			<h4>No existen datos.</h4>
+			<h3>No existen datos.</h3>
 
 			@endforelse
 		</tbody>
 
 	</table>
 </div>
+@include('layouts.modify')
 
 <!-- /REPORT -->
 @endsection

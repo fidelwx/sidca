@@ -1,7 +1,9 @@
 @extends('layouts.template')
 @section('content')
+@include('layouts.alert')
 <div class=" uk-width-1-2@s uk-padding-small uk-background-secondary">
-	<form class="uk-grid-small" uk-grid method="POST" action="{{route('profesores.store')}}">
+	<form class="uk-grid-small" uk-grid method="POST" action="{{route('profesores.update',$teacher->id)}}">
+		{{ method_field('PATCH') }}
 		{{ csrf_field() }}
 
 		<legend class="uk-legend uk-text-center">SIDCA - Registro</legend>
@@ -17,19 +19,24 @@
 		<div class="uk-width-1-4@s">
 			<input value="{{ $teacher->last_name }}" name="last_name" class="uk-input" type="text" placeholder="Apellidos">
 		</div>
-		@forelse($teacher->phones as $phone)
+		<!-- Phones -->
+		@if($count_phones == 2)
+		@foreach($teacher->phones as $phone)
 		<div class="uk-width-1-4@s">
 			<input value="{{ $phone->number }}" name="phone{{ $i++ }}" class="uk-input"  id="input" type="number" placeholder="Telefono Movil">
 		</div>
-		@empty
-			<div class="uk-width-1-4@s">
-				<input value="" name="phone{{ $h++ }}" class="uk-input"  id="input" type="number" placeholder=@if($h == 1)
-				"Telefono Movil"
-				@else
-				"Telefono Casa"
-				@endif>
-			</div>
-		@endforelse
+		@endforeach
+		@else
+		<div class="uk-width-1-4@s">
+			<input value="{{ $teacher->find($teacher->id)->phones->first()->number }}" name="phone1" class="uk-input"  id="input" type="number" placeholder="Telefono Movil">
+		</div>
+		
+		<div class="uk-width-1-4@s">
+			<input value="" name="phone2" class="uk-input"  id="input" type="number" placeholder="Telefono Casa">
+		</div>
+		@endif
+		<!-- /Phones -->
+
 		<div class="uk-width-1-4@s">
 			<input value="{{ $teacher->birthdate }}" class="uk-input" id="input" name="birthdate" type="date" placeholder="Fecha de Nac">
 		</div>
@@ -37,14 +44,23 @@
 		<div class="uk-width-1-2@s">
 			<input value="{{ $teacher->address }}" class="uk-input" type="text" name="address" placeholder="Direccion">
 		</div>	
-
+		
+		<!-- Emails -->
+		@if($count_emails == 2)
+		@foreach($teacher->emails as $correo)
 		<div class="uk-width-1-2@s">
-			<input value="{{ $teacher->email1 }}" class="uk-input" type="email" placeholder="Correo Personal" name="email1">
+			<input value="{{ $correo->email }}" name="email{{ $i++ }}" class="uk-input"  id="input" type="email" placeholder="Correo Personal">
 		</div>
-
+		@endforeach
+		@else
 		<div class="uk-width-1-2@s">
-			<input value="{{ $teacher->email2 }}" class="uk-input" name="email2" type="email" placeholder="Correo Institucional @unerg.edu.ve">
+			<input value="{{ $teacher->find($teacher->id)->emails->first()->email }}" name="email1" class="uk-input"  id="input" type="email" placeholder="Correo Personal">
 		</div>
+		<div class="uk-width-1-2@s">
+			<input value="" name="email2" class="uk-input"  id="input" type="email" placeholder="Correo Institucional">
+		</div>
+		@endif
+		<!-- /Email -->
 
 		<div class="uk-width-1-4@s">
 			<select class="uk-select" name="countrie_id" id="form-stacked-select">
@@ -67,9 +83,9 @@
 				@endforelse
 			</select>
 		</div>
-		<div class="uk-width-1-4@s">
+		<div class="uk-width-1-2@s">
 			<select class="uk-select" name="headquarters_id" id="form-stacked-select">
-				<option value="{{ $teacher->headquarters_id }}" >Sede</option>
+				<option value="{{ $teacher->headquarter_id }}" >Sede</option>
 				@forelse($sedes as $sede)
 				<option value="{{$sede->id}}">{{$sede->headquarter}}</option>
 				@empty
@@ -88,7 +104,7 @@
 			</select>
 		</div>
 
-		<div class="uk-width-1-4@s">
+		<div class="uk-width-1-2@s">
 			<select class="uk-select" name="status" id="form-stacked-select">
 				<option value="{{ $teacher->status }}">Estatus</option>
 				<option value="Activo">Activo</option>
@@ -98,7 +114,7 @@
 
 		<div class="uk-width-1-1@s">
 			<div class="uk-margin">
-				<textarea class="uk-textarea" name="observation" value="{{ $teacher->observation }}" rows="2" placeholder="Observaciones"></textarea>
+				<textarea class="uk-textarea" name="observation" value="" rows="2" placeholder="Observaciones">{{ $teacher->observation }}</textarea>
 			</div>
 		</div>
 
