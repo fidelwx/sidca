@@ -8,7 +8,7 @@ class Area extends Model
 {
     public $timestamps = false;
     
-    protected = [
+    protected $fillable= [
     	'area',
         'nuclei_id',
     ];

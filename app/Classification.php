@@ -16,4 +16,8 @@ class Classification extends Model
     {
     	return $this->hasMany(Teacher::class);
     }
+    public function anexes()
+    {
+    	return $this->hasMany(Annexes::class);
+    }
 }

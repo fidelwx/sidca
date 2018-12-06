@@ -76,4 +76,13 @@ class Teacher extends Model
     {
         return $this->hasMany(Study::class);
     }
+
+    public function annexes()
+    {
+        return $this->hasMany(Annexes::class);
+    }
+
+    public function commision(){
+        return $this->hasOne(ServiceCommission::class);
+    }
 }
