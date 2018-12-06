@@ -19,7 +19,7 @@ class Teacher extends Model
         'state_id', 
         'countrie_id', 
         'classification_id',  
-        'headquarters_id', 
+        'headquarter_id', 
         'status', 
         'observation',
         'parish_id',
@@ -44,7 +44,7 @@ class Teacher extends Model
 
     public function headquarter()
     {
-        return $this->belongsTo(Headquarter::class);
+        return $this->belongsTo(Headquarter::class, 'headquarter_id');
     }
 
     public function state()

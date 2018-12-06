@@ -23,12 +23,21 @@ class teachers extends Controller
     
     public function index()
     {
-        $teachers = Teacher::all();
+
+        $teachers = Teacher::paginate(5);
+        $sedes = Headquarter::all();
+        $paises = Country::all();
+        $clasificaciones = Classification::all();
+        $estados = State::all();
+        // contadores
         $i = 1;
-        return view('teacher/index', [
-            'teachers' => $teachers,
-            'i' => $i,
-        ]);
+        return view('teacher/index')
+        ->with('sedes',$sedes)
+        ->with('clasificaciones',$clasificaciones)
+        ->with('paises',$paises)
+        ->with('estados',$estados)
+        ->with('i',$i)
+        ->with('teachers', $teachers);    
     }
 
     public function create()
@@ -90,32 +99,31 @@ class teachers extends Controller
         return view('teacher.show');
     }
 
-    public function edit($id)
+    public function edit(Teacher $teacher)
     {
         // dd($teacher->id);
-        $teacher = Teacher::find($id);
         $sedes = Headquarter::all();
         $paises = Country::all();
         $clasificaciones = Classification::all();
         $estados = State::all();
-        $phones = Phone::where('teacher_id', $teacher->id);
-        $emails = Email::where('teacher_id', $teacher->id);
-        $i = 0;
-        $h = 0;
+        $count_phones = Teacher::find($teacher->id)->phones->count();
+        $count_emails = Teacher::find($teacher->id)->emails->count();
+        // contadores
+        $i = 1;
+        // dd($count_emails);
 
         return view('teacher.edit')
-        ->with('i',$i)
-        ->with('h',$h)
+        ->with('count_phones',$count_phones)
+        ->with('count_emails',$count_emails)
         ->with('sedes',$sedes)
         ->with('clasificaciones',$clasificaciones)
         ->with('paises',$paises)
         ->with('estados',$estados)
-        ->with('phones',$phones)
-        ->with('emails',$emails)
+        ->with('i',$i)
         ->with('teacher', $teacher);
     }
 
-    public function update(TeacherRequest $request,$id)
+    public function update(Request $request,$id)
     {
         $teacher = Teacher::find($id);
 
@@ -131,6 +139,8 @@ class teachers extends Controller
             'status'        =>  ($request->status)?$request->status:$teacher->status,
             'observation'   =>  ($request->observation)?$request->observation:$teacher->observation,
             'state_id'      =>  ($request->state_id)?$request->state_id:$teacher->state_id,
+            'municipality_id'      =>  ($request->municipality_id)?$request->municipality_id:$teacher->municipality_id,
+            'parish_id'     =>  ($request->parish_id)?$request->parish_id:$teacher->parish_id,
         ]);
 
 
