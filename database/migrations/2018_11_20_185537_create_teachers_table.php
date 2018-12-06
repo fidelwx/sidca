@@ -20,15 +20,22 @@ class CreateTeachersTable extends Migration
             $table->string('identity')->unique();
             $table->date('birthdate');
             $table->string('address');
+
             $table->unsignedInteger('countrie_id');
+            $table->unsignedInteger('crh_id');
+            $table->integer('roster_id')->unsigned();
+            $table->unsignedInteger('state_id');
             $table->unsignedInteger('classification_id');
-            $table->unsignedInteger('headquarters_id');
-            $table->enum('status', ['contratado', 'ordinario']);
+            $table->unsignedInteger('headquarter_id');
+            $table->enum('status', ['activo', 'inactivo']);
             $table->string('observation');
 
-            $table->foreign('classification_id')->references('id')->on('classifications')->onDelete('cascade');
             $table->foreign('countrie_id')->references('id')->on('countries')->onDelete('cascade');
-            $table->foreign('headquarters_id')->references('id')->on('headquarters')->onDelete('cascade');
+            $table->foreign('state_id')->references('id')->on('states')->onDelete('cascade');
+            $table->foreign('crh_id')->references('id')->on('crhs')->onDelete('cascade');
+            $table->foreign('classification_id')->references('id')->on('classifications')->onDelete('cascade');
+            $table->foreign('headquarter_id')->references('id')->on('headquarters')->onDelete('cascade');
+            $table->foreign('roster_id')->references('id')->on('rosters')->onDelete('cascade');
 
         });
     }

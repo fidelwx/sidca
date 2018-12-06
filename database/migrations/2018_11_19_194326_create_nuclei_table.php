@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateParishesTable extends Migration
+class CreateNucleiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateParishesTable extends Migration
      */
     public function up()
     {
-        Schema::create('parishes', function (Blueprint $table) {
+        Schema::create('nuclei', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('parish');
-            $table->unsignedInteger('municipalities_id');
-
-            $table->foreign('municipalities_id')->references('id')->on('municipalities')->onDelecte('cascade');
+            $table->string('nucleus');
+            $table->unsignedInteger('headquarter_id');
+            $table->foreign('headquarter_id')->references('id')->on('headquarters')->onDelete('cascade');
         });
     }
 
@@ -29,6 +28,6 @@ class CreateParishesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('parishes');
+        Schema::dropIfExists('nuclei');
     }
 }

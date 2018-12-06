@@ -9,7 +9,9 @@ class Program extends Model
     public $timestamps = false;
     
     protected = [
-    	'program', 
+    	'program',
+        'director',
+        'resolution', 
     	'area_id',
     ];
 
@@ -18,8 +20,14 @@ class Program extends Model
     	return $this->belongsTo(Area::class);
     }
 
+    
+
     public function subjects()
     {
         return $this->hasMany(Subject::class);
+    }
+
+    public function rosters(){
+        return $this->hasMany(Roster::class);
     }
 }

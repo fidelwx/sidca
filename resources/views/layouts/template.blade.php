@@ -28,7 +28,7 @@
 						<div class="uk-navbar-right">
 							<ul class="uk-navbar-nav">
 								<li class="uk-active uk-visible@m"><a href="" data-uk-icon="home"></a></li>
-								<li class="uk-visible@s"><a href="#">PROFESOR</a></li>
+								<li class="uk-visible@s"><a href="/profesores/">PROFESOR</a></li>
 								<li class="uk-visible@s"><a href="#">NOMINA</a></li>
 								<li class="uk-visible@s"><a href="#">PRECARGAR DATOS</a></li>
 								<li><a class="uk-navbar-toggle" data-uk-toggle data-uk-navbar-toggle-icon uk-toggle="target: #offcanvas-slide"></a></li>
@@ -41,20 +41,6 @@
 			<!-- /NAV -->
 
 			@yield('content')
-
-			
-			@if(session('info'))
-				<section class="content-header">
-						<div class="row">
-							<div class="col-md-12">
-								<div class="alert alert-success alert-dismissible">
-									<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-									{{ session('info') }}
-								</div>
-							</div>
-						</div>
-				</section>
-			@endif
 
 			<!-- FOOT -->
 			<div class="uk-position-bottom-center uk-position-small">
@@ -73,12 +59,8 @@
 					<li class="uk-parent">
 						<a href="#" >PROFESOR</a>
 						<ul class="uk-nav-sub">
-							<li><a href="#">SubMenu 1</a></li>
-							<li><a href="#">SubMenu 2</a></li>
-							<ul class="uk-nav-sub">
-								<li><a href="#">SubMenu 3</a></li>
-								<li><a href="#">SubMenu 4</a></li>
-							</ul>
+							<li><a href="{{route('profesores.create')}}">Registrar Profesor</a></li>
+							<li><a href="{{route('profesores.index')}}">Listado de Profesores</a></li>
 						</ul>
 					</li>
 					<li class="uk-parent">
@@ -120,6 +102,8 @@
 
 	</div>
 	<!-- JS FILES -->
+	<script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+	<script src="{{asset('js/myjs.js')}}"></script>
 	<script src="{{asset('js/uikit.min.js')}}"></script>
 	<script src="{{asset('js/uikit-icons.min.js')}}"></script>
 </body>

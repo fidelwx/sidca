@@ -22,7 +22,6 @@ class UserSeeders extends Seeder
         // Creamos usuario administrador
 
         $user = new \App\User();
-        $user->name           = 'admin';
         $user->email          = 'admin@gmail.com';
         $user->user           = 'admin';
         $user->password       = bcrypt('admin');

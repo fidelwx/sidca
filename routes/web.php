@@ -9,3 +9,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('profesores','teachers');
+
+Route::get('/profesores/edit/{teacher}', 'teachers@edit');

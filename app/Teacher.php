@@ -15,17 +15,15 @@ class Teacher extends Model
         'address',
         'birthdate',
         'type_id', 
+        'crh_id', 
+        'roster_id', 
         'area_id', 
         'state_id', 
         'countrie_id', 
         'classification_id',  
-        'headquarters_id', 
+        'headquarter_id', 
         'status', 
-        'observation',
-        'parish_id',
-        'municipality_id',
-
-    ];
+        'observation',    ];
 
     public function type()
     {
@@ -44,22 +42,12 @@ class Teacher extends Model
 
     public function headquarter()
     {
-        return $this->belongsTo(Headquarter::class);
+        return $this->belongsTo(Headquarter::class, 'headquarter_id');
     }
 
     public function state()
     {
         return $this->belongsTo(State::class);
-    }
-
-    public function municipality()
-    {
-        return $this->belongsTo(Municipality::class);
-    }
-
-    public function parish()
-    {
-        return $this->belongsTo(Parish::class);
     }
 
     public function emails()
@@ -75,5 +63,43 @@ class Teacher extends Model
     public function studies()
     {
         return $this->hasMany(Study::class);
+    }
+
+    public function annexes()
+    {
+        return $this->hasMany(Annexes::class);
+    }
+
+    public function commision(){
+        return $this->hasOne(ServiceCommission::class);
+    }
+
+    public function competition(){
+        return $this->belongsTo(Competition::class);
+    }
+
+    public function permmissions()
+    {
+        return $this->hasMany(Permission::class);
+    }
+
+    public function sabbaticals()
+    {
+        return $this->hasMany(Sabbatical::class);
+    }
+
+    public function transfers()
+    {
+        return $this->hasMany(Transfer::class);
+    }
+
+    public function roster()
+    {
+        return $this->belognsTo(Roster::class);
+    }
+
+    public function crh()
+    {
+        return $this->belognsTo(Crh::class);
     }
 }
