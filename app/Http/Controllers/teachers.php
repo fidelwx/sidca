@@ -123,11 +123,13 @@ class teachers extends Controller
         ->with('teacher', $teacher);
     }
 
-    public function update(Request $request,$id)
+    public function update(TeacherRequest $request,$id)
     {
         $teacher = Teacher::find($id);
+        $telefono = Phone::where('teacher_id',$id);
+        $correo = Email::where('teacher_id',$id);
 
-        $profesor = Teacher::update([
+        $teacher->update([
             'first_name'    =>  ($request->first_name)?$request->first_name:$teacher->first_name,
             'last_name'     =>  ($request->last_name)?$request->last_name:$teacher->last_name,
             'identity'      =>  ($request->identity)?$request->identity:$teacher->identity,
@@ -139,11 +141,34 @@ class teachers extends Controller
             'status'        =>  ($request->status)?$request->status:$teacher->status,
             'observation'   =>  ($request->observation)?$request->observation:$teacher->observation,
             'state_id'      =>  ($request->state_id)?$request->state_id:$teacher->state_id,
-            'municipality_id'      =>  ($request->municipality_id)?$request->municipality_id:$teacher->municipality_id,
-            'parish_id'     =>  ($request->parish_id)?$request->parish_id:$teacher->parish_id,
+            // 'municipality_id'      =>  ($request->municipality_id)?$request->municipality_id:$teacher->municipality_id,
+            // 'parish_id'     =>  ($request->parish_id)?$request->parish_id:$teacher->parish_id,
         ]);
+        if ($telefono->count() == 2) {
+            for ($i=1; $i < 3; $i++) { 
+                $telefono->update([
+                    'number' => ($i == 1)?$request->phone1:$request->phone2,
+                ]);
+            }
+        }elseif($telefono->first()->number != $request->phone1){
+            $telefono->update([
+                'number' => $request->phone1,
+            ]);
+        }
+        
+        if ($correo->count() == 2) {
+            for ($i=1; $i < 3; $i++) { 
+                $correo->update([
+                    'number' => ($i == 1)?$request->phone1:$request->phone2,
+                ]);
+            }
+        }elseif($correo->first()->number != $request->phone1){
+            $correo->update([
+                'number' => $request->phone1,
+            ]);
+        }
 
-
+        return back()->with('info','Se ha modificado de manera exitosa!');
     }
 
     public function destroy($id)
