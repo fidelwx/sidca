@@ -13,7 +13,7 @@ class CreateSubjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('curricular_unit', function (Blueprint $table) {
+        Schema::create('subjects', function (Blueprint $table) {
             $table->increments('id');
             $table->string('subject');
             $table->integer('nivel');
