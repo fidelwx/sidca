@@ -157,7 +157,7 @@ class teachers extends Controller
             $telefono->update([
                 'number' => $request->phone1,
             ]);
-            if ($telefono->first()->number!= $request->phone2 && $telefono->last()->number != $request->phone2) {
+            if ($telefono->first()->number != $request->phone2) {
                 $telefono->update([
                     'number' => $request->phone2,
                 ]);
