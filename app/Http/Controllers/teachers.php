@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\TeacherRequest;
+use App\Http\Requests\UpdateRequest;
 use App\Teacher;
 use App\Email;
 use App\State;
@@ -123,7 +124,7 @@ class teachers extends Controller
         ->with('teacher', $teacher);
     }
 
-    public function update(TeacherRequest $request,$id)
+    public function update(UpdateRequest $request,$id)
     {
         $teacher = Teacher::find($id);
         $telefono = Phone::where('teacher_id',$id);
@@ -144,6 +145,8 @@ class teachers extends Controller
             // 'municipality_id'      =>  ($request->municipality_id)?$request->municipality_id:$teacher->municipality_id,
             // 'parish_id'     =>  ($request->parish_id)?$request->parish_id:$teacher->parish_id,
         ]);
+
+        // UPDATE PHONE
         if ($telefono->count() == 2) {
             for ($i=1; $i < 3; $i++) { 
                 $telefono->update([
@@ -154,18 +157,29 @@ class teachers extends Controller
             $telefono->update([
                 'number' => $request->phone1,
             ]);
+            if ($telefono->first()->number!= $request->phone2 && $telefono->last()->number != $request->phone2) {
+                $telefono->update([
+                    'number' => $request->phone2,
+                ]);
+            }
         }
         
+        // UPDATE EMAIL
         if ($correo->count() == 2) {
             for ($i=1; $i < 3; $i++) { 
                 $correo->update([
-                    'number' => ($i == 1)?$request->phone1:$request->phone2,
+                    'email' => ($i == 1)?$request->email1:$request->email2,
                 ]);
             }
-        }elseif($correo->first()->number != $request->phone1){
+        }elseif($correo->first()->email != $request->email1){
             $correo->update([
-                'number' => $request->phone1,
+                'email' => $request->email1,
             ]);
+            if ($correo->first()->email!= $request->email2) {
+                $correo->update([
+                    'email' => $request->email2,
+                ]);
+            }
         }
 
         return back()->with('info','Se ha modificado de manera exitosa!');

@@ -1,8 +1,9 @@
 @extends('layouts.template')
 @section('content')
+@include('layouts.alert')
 <div class=" uk-width-1-2@s uk-padding-small uk-background-secondary">
 	<form class="uk-grid-small" uk-grid method="POST" action="{{route('profesores.update',$teacher->id)}}">
-		{{ method('PATCH') }}
+		{{ method_field('PATCH') }}
 		{{ csrf_field() }}
 
 		<legend class="uk-legend uk-text-center">SIDCA - Registro</legend>
