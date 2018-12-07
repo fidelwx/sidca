@@ -6,18 +6,13 @@ class UserSeeders extends Seeder
 {
     public function run()
     {
+        $roles = array('administrador','creador','consultor');
         // Creamos tipos de roles
-        $rol = new \App\Role();
-        $rol->rol = 'administrador';
-        $rol->save();
-
-        $rol = new \App\Role();
-        $rol->rol = 'creador';
-        $rol->save();
-
-        $rol = new \App\Role();
-        $rol->rol = 'consultor';
-        $rol->save();
+        foreach ($roles as $role) {
+            $rol = new \App\Role();
+            $rol->rol = $role;
+            $rol->save();
+        }
 
         // Creamos usuario administrador
 
