@@ -22,13 +22,14 @@ class CreateTeachersTable extends Migration
             $table->string('address');
 
             $table->unsignedInteger('countrie_id');
-            $table->unsignedInteger('crh_id');
-            $table->integer('roster_id')->unsigned();
-            $table->unsignedInteger('state_id');
+            
+            $table->unsignedInteger('crh_id')->nullable();
+            $table->integer('roster_id')->unsigned()->nullable();
+            $table->unsignedInteger('state_id')->nullable();
             $table->unsignedInteger('classification_id');
             $table->unsignedInteger('headquarter_id');
             $table->enum('status', ['activo', 'inactivo']);
-            $table->string('observation');
+            $table->string('observation')->nullable();
 
             $table->foreign('countrie_id')->references('id')->on('countries')->onDelete('cascade');
             $table->foreign('state_id')->references('id')->on('states')->onDelete('cascade');
