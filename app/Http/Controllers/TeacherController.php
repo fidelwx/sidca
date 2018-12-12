@@ -13,15 +13,13 @@ use App\Headquarter;
 use App\Classification;
 use App\Phone;
 
-
-
-class teachers extends Controller
+class TeacherController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
-    
+
     public function index()
     {
 
@@ -33,26 +31,26 @@ class teachers extends Controller
         // contadores
         $i = 1;
         return view('teacher/index')
-        ->with('sedes',$sedes)
-        ->with('clasificaciones',$clasificaciones)
-        ->with('paises',$paises)
-        ->with('estados',$estados)
-        ->with('i',$i)
-        ->with('teachers', $teachers);    
+            ->with('sedes',$sedes)
+            ->with('clasificaciones',$clasificaciones)
+            ->with('paises',$paises)
+            ->with('estados',$estados)
+            ->with('i',$i)
+            ->with('teachers', $teachers);
     }
 
     public function create()
-    {   
+    {
         $sedes = Headquarter::all();
         $paises = Country::all();
         $clasificaciones = Classification::all();
         $estados = State::all();
 
         return view('teacher.create')
-        ->with('sedes',$sedes)
-        ->with('clasificaciones',$clasificaciones)
-        ->with('paises',$paises)
-        ->with('estados',$estados);
+            ->with('sedes',$sedes)
+            ->with('clasificaciones',$clasificaciones)
+            ->with('paises',$paises)
+            ->with('estados',$estados);
     }
 
     public function store(TeacherRequest $request)
@@ -72,8 +70,8 @@ class teachers extends Controller
             'municipality_id'      =>  $request->municipality_id,
             'parish_id'     =>  $request->parish_id,
         ]);
-        
-        for ($i=1; $i < 3; $i++) { 
+
+        for ($i=1; $i < 3; $i++) {
             if (!empty($request->input('phone'.$i))) {
                 $telefono= Phone::create([
                     'type'  =>  ($i == 1)?'MOVIL':'CASA',
@@ -82,13 +80,13 @@ class teachers extends Controller
                 ]);
             }
         }
-        
-        for ($e=0; $e < 3; $e++) { 
+
+        for ($e=0; $e < 3; $e++) {
             if (!empty($request->input('email'.$e))) {
                 $correo= Email::create([
                     'email'    =>  ($e == 1)?$request->email1:$request->email2,
                     'teacher_id'    => $profesor->id
-                ]); 
+                ]);
             }
         }
 
@@ -100,35 +98,35 @@ class teachers extends Controller
         return view('teacher.show');
     }
 
-    public function edit(Teacher $teacher)
+    public function edit($id)
     {
-        // dd($teacher->id);
+        $teacher = Teacher::find($id);
         $sedes = Headquarter::all();
         $paises = Country::all();
         $clasificaciones = Classification::all();
         $estados = State::all();
-        $count_phones = Teacher::find($teacher->id)->phones->count();
-        $count_emails = Teacher::find($teacher->id)->emails->count();
+        $count_phones = $teacher->phones->count();
+        $count_emails = $teacher->emails->count();
         // contadores
         $i = 1;
         // dd($count_emails);
 
         return view('teacher.edit')
-        ->with('count_phones',$count_phones)
-        ->with('count_emails',$count_emails)
-        ->with('sedes',$sedes)
-        ->with('clasificaciones',$clasificaciones)
-        ->with('paises',$paises)
-        ->with('estados',$estados)
-        ->with('i',$i)
-        ->with('teacher', $teacher);
+            ->with('count_phones',$count_phones)
+            ->with('count_emails',$count_emails)
+            ->with('sedes',$sedes)
+            ->with('clasificaciones',$clasificaciones)
+            ->with('paises',$paises)
+            ->with('estados',$estados)
+            ->with('i',$i)
+            ->with('teacher', $teacher);
     }
 
     public function update(UpdateRequest $request,$id)
     {
         $teacher = Teacher::find($id);
-        $telefono = Phone::where('teacher_id',$id);
-        $correo = Email::where('teacher_id',$id);
+        $telefonos = Phone::where('teacher_id',$id);
+        $correos = Email::where('teacher_id',$id);
 
         $teacher->update([
             'first_name'    =>  ($request->first_name)?$request->first_name:$teacher->first_name,
@@ -146,9 +144,13 @@ class teachers extends Controller
             // 'parish_id'     =>  ($request->parish_id)?$request->parish_id:$teacher->parish_id,
         ]);
 
+        foreach ($telefonos as $indice => $telefono) {
+            dd($telefono);
+        }
+
         // UPDATE PHONE
         if ($telefono->count() == 2) {
-            for ($i=1; $i < 3; $i++) { 
+            for ($i=1; $i < 3; $i++) {
                 $telefono->update([
                     'number' => ($i == 1)?$request->phone1:$request->phone2,
                 ]);
@@ -163,10 +165,10 @@ class teachers extends Controller
                 ]);
             }
         }
-        
+
         // UPDATE EMAIL
         if ($correo->count() == 2) {
-            for ($i=1; $i < 3; $i++) { 
+            for ($i=1; $i < 3; $i++) {
                 $correo->update([
                     'email' => ($i == 1)?$request->email1:$request->email2,
                 ]);

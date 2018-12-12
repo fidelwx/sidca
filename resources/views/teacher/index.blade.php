@@ -40,7 +40,8 @@
 				<td>{{ $teacher->status }}</td>
 
 				<td>
-					<a href="{{-- /profesores/edit/{{$teacher->id}} --}} #modal-sections" uk-toggle uk-icon="file-edit"></a> 
+					<!-- #modal-sections -->
+					<a href="{{ route('profesores.edit', $teacher->id) }}" uk-toggle uk-icon="file-edit"></a>
 					<a href="" uk-icon="info"></a>
 				</td>
 
