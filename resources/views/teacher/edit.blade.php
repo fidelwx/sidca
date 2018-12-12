@@ -28,7 +28,7 @@
 		@endforeach
 		@else
 		<div class="uk-width-1-4@s">
-			<input value="{{ $teacher->find($teacher->id)->phones->first()->number }}" name="phone1" class="uk-input"  id="input" type="number" placeholder="Telefono Movil">
+			<input value="{{ $teacher->phones->number }}" name="phone1" class="uk-input"  id="input" type="number" placeholder="Telefono Movil">
 		</div>
 		
 		<div class="uk-width-1-4@s">
@@ -64,51 +64,53 @@
 
 		<div class="uk-width-1-4@s">
 			<select class="uk-select" name="countrie_id" id="form-stacked-select">
-				<option value="{{ $teacher->countrie_id }}">Pais</option>
-				@forelse($paises as $pais)
-				<option value="{{$pais->id}}">{{$pais->country}}</option>
-				@empty
-				Esta Vacio!
-				@endforelse
+				@foreach($paises as $pais)
+					@if($teacher->countrie_id == $pais->id)
+						<option selected value="{{ $pais->id }}">{{ $pais->country }}</option>
+					@endif
+						<option value="{{ $pais->id }}">{{ $pais->country }}</option>
+				@endforeach
 			</select>
 		</div>
 
 		<div class="uk-width-1-4@s">
 			<select name="state_id" class="uk-select" id="form-stacked-select">
-				<option  value="{{ $teacher->state_id }}">Estados</option>
-				@forelse($estados as $estado)
-				<option value="{{$estado->id}}">{{$estado->states}}</option>
-				@empty
-				Esta Vacio!
-				@endforelse
+				@foreach($estados as $estado)
+					@if($teacher->state_id == $estado->id)
+						<option selected value="{{ $estado->id }}">{{ $estado->states }}</option>
+					@endif
+						<option value="{{ $estado->id }}">{{ $estado->state }}</option>
+				@endforeach
 			</select>
 		</div>
 		<div class="uk-width-1-2@s">
 			<select class="uk-select" name="headquarters_id" id="form-stacked-select">
-				<option value="{{ $teacher->headquarter_id }}" >Sede</option>
-				@forelse($sedes as $sede)
-				<option value="{{$sede->id}}">{{$sede->headquarter}}</option>
-				@empty
-				Esta Vacio!
-				@endforelse
+				@foreach($sedes as $sede)
+					@if($teacher->sede_id == $sede->id)
+						<option selected value="{{ $sede->id }}">{{ $sede->headquarter }}</option>
+					@endif
+					<option value="{{ $sede->id }}">{{ $sede->headquarter }}</option>
+				@endforeach
 			</select>
 		</div>
 		<div class="uk-width-1-2@s">
 			<select class="uk-select" name="classification_id" id="form-stacked-select">
-				<option  value="{{ $teacher->classification_id }}">Clasificacion</option>
-				@forelse($clasificaciones as $clasificacion)
-				<option value="{{$clasificacion->id}}">{{$clasificacion->classification}}</option>
-				@empty
-				Esta Vacio!
-				@endforelse
+				@foreach($clasificaciones as $clasificacion)
+					@if($teacher->classification_id == $clasificacion->id)
+						<option selected value="{{ $clasificacion->id }}">{{ $clasificacion->classification }}</option>
+					@endif
+					<option value="{{ $clasificacion->id }}">{{ $clasificacion->classification }}</option>
+				@endforeach
 			</select>
 		</div>
 
 		<div class="uk-width-1-2@s">
 			<select class="uk-select" name="status" id="form-stacked-select">
-				<option value="{{ $teacher->status }}">Estatus</option>
-				<option value="Activo">Activo</option>
-				<option value="Inactivo">Inactivo</option>
+				@if($teacher->status == 'activo')
+					<option value="Activo">Activo</option>
+				@else
+					<option value="Inactivo">Inactivo</option>
+				@endif
 			</select>
 		</div>
 
